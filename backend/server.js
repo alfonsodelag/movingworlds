@@ -1,13 +1,22 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const connectDB = require('./config/db');
+require('dotenv').config({ path: 'variables.env' });
+const PORT = process.env.PORT;
+const bodyParser = require('body-parser');
 
-app.post('/create', (req, res) =>
-    res.send('Hello World!'));
+app.use(bodyParser.json());
+
+connectDB();
 
 
+app.post('/create', (req, res) => {
+    const body = req.body;
+    console.log(body);
+});
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
 
 
 

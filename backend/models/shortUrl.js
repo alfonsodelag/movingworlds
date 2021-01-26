@@ -19,7 +19,7 @@ const shortUrlSchema = new mongoose.Schema({
     },
     last_access: {
         type: Date,
-        default: null,
+        default: "",
         required: false
     },
     clicks: {
@@ -29,5 +29,5 @@ const shortUrlSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ShortUrl', ShortUrlSchema);
+module.exports = mongoose.model('ShortUrl', shortUrlSchema);
 

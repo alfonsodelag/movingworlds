@@ -25,16 +25,33 @@ app.post('/shortUrls', async (req, res) => {
     res.redirect('http://localhost:3000');
 });
 
-
-app.get('/:shortUrl', async (req, res) => {
+const getShortUrl = async (req, res, next) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl })
     if (shortUrl == null) return res.sendStatus(404);
+    req.shortUrl = shortUrl;
+    next();
+}
+
+app.get('/:shortUrl', getShortUrl, async (req, res) => {
+    const shortUrl = req.shortUrl;
 
     shortUrl.clicks++
     shortUrl.last_access = new Date();
     shortUrl.save();
     res.redirect(shortUrl.full);
 });
+
+
+app.get('/:shortUrl/stats', getShortUrl, async (req, res) => {
+    const shortUrl = req.shortUrl;
+
+    res.send({
+        registeredAt: shortUrl.registered_at,
+        lastAccess: shortUrl.last_access,
+        clicks: shortUrl.clicks
+    });
+});
+
 
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));

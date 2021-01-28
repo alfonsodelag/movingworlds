@@ -46,13 +46,21 @@ app.get('/:shortUrl/stats', getShortUrl, async (req, res) => {
     const shortUrl = req.shortUrl;
 
     res.send({
+        short: shortUrl.short,
         registeredAt: shortUrl.registered_at,
         lastAccess: shortUrl.last_access,
-        clicks: shortUrl.clicks
+        clicks: shortUrl.clicks,
     });
 });
 
-
+app.post('/:shortUrl/modify', getShortUrl, async (req, res) => {
+    const shortUrl = req.shortUrl;
+    if (req.body.changedName.length >= 4) {
+        return await shortUrl.updateOne({ short: req.body.changedName });
+    } else {
+        res.sendStatus(400).send("Text must be at least 4 characters long")
+    }
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
 

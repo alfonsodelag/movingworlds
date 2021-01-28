@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axiosClient from '../config/axios';
 
-function Stats({ stats, setComponent, component }) {
 
-    const changeComponent = () => {
-        setComponent(!component);
+function Stats({ stats, setHideStats, hideStats, results }) {
+    const [alert, setAlert] = useState(true);
+    const [changedName, setChangedName] = useState("");
+
+    const changehideStats = () => {
+        setHideStats(!hideStats);
+    }
+
+    const changeInput = (e) => {
+        setChangedName(e.target.value)
+    }
+
+    console.log("alert", alert);
+
+    const changeUrl = async (e, shortUrl) => {
+        e.preventDefault();
+        try {
+            const url = `http://localhost:4000/${shortUrl}/modify`
+            const response = await axiosClient.post(url, { changedName: changedName });
+            const responseData = response.data;
+            setAlert(responseData);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     return (
@@ -28,8 +50,32 @@ function Stats({ stats, setComponent, component }) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <button className="button" onClick={changeComponent}>Go Back</button>
+                            <button className="button" onClick={changehideStats}>Go Back</button>
+                            { alert ?
+                                null
+                                :
+                                (
+                                    <>
+                                        <p>Text must be at least 4 characters long</p>
+                                    </>
+                                )
+                            }
                         </>
+                    )
+                    :
+                    null
+            }
+            {
+                results ?
+
+                    (
+                        <>
+                            <form onSubmit={(e) => changeUrl(e, stats.short)} action="" className="search">
+                                <input required placeholder="Please change the URL here..." type="text" name="changedName" id="changedName" onChange={changeInput} value={changedName} className="form-control col mr-2" />
+                                <button className="button" type="submit">Change Url</button>
+                            </form>
+                        </>
+
                     )
                     :
                     null

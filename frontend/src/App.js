@@ -1,13 +1,25 @@
 import React from 'react';
 import Header from './components/Header';
 import SearchBox from './components/SearchBox';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+
+import Stats from './components/Stats';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
-      <SearchBox />
-    </div>
+      <Switch>
+        <SearchBox exact path="/" />
+        <Stats exact path="/stats" />
+      </Switch>
+    </Router>
   );
 }
 

@@ -31,7 +31,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 700px;
+  max-width: 1400px;
   padding: 15px 20px 45px;
   margin: 0 auto;
   background-color: #F7F7F7;
@@ -51,22 +51,14 @@ code {
   border: 1px solid #43BCE7;
   background-color: #43BCE7;
   text-align: center;
-  color: #fff;
+  color: #FFFFFF;
   border-radius: 7px 7px 7px 7px;
   cursor: pointer;
   font-size: 20px;
 }
 
-.button-stats {
+.stats {
   width: 100%;
-  height: 36px;
-  border: 1px solid #43BCE7;
-  background-color: #43BCE7;
-  text-align: center;
-  color: #fff;
-  border-radius: 7px 7px 7px 7px;
-  cursor: pointer;
-  font-size: 20px;
 }
 
 .search {

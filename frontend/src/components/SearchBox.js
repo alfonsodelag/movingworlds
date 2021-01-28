@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../config/axios';
 import moment from 'moment';
 import Stats from './Stats';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 function SearchBox() {
     const [results, setResults] = useState([]);
     const [stats, setStats] = useState(false);
-    const [component, setComponent] = useState(true);
+    const [hideStats, setHideStats] = useState(true);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
         async function getUrls() {
@@ -29,7 +36,8 @@ function SearchBox() {
             const response = await axiosClient.get(url);
             const responseData = response.data;
             setStats(responseData);
-            setComponent(!component);
+            setHideStats(!hideStats);
+            console.log("stats after setting stats", stats);
         } catch (error) {
             console.log(error.message);
         }
@@ -37,7 +45,6 @@ function SearchBox() {
 
 
     return (
-
         <div className="searchbox">
             <h1 className="text-center pb-4">Post a URL</h1>
             <form action="http://localhost:4000/shortUrls" method="POST" className="search">
@@ -48,7 +55,7 @@ function SearchBox() {
                 </button>
             </form>
 
-            { component ?
+            {hideStats ?
 
                 <table className="table table-striped table-responsive">
                     <thead>
@@ -70,7 +77,7 @@ function SearchBox() {
                                     <td >{moment(result.registered_at).format('DD/MM/YY')}</td>
                                     <td >{moment(result.last_access).format('DD/MM/YY')}</td>
                                     <td >{result.clicks}</td>
-                                    <td><button className="button-stats" onClick={() => getStats(result.short)}>Stats</button></td>
+                                    <td><Link><button className="button stats" onClick={() => getStats(result.short)}>See Stats and Modify Url</button></Link></td>
                                 </tr>
                             ))
                         }
@@ -81,8 +88,9 @@ function SearchBox() {
 
                 <Stats
                     stats={stats}
-                    component={component}
-                    setComponent={setComponent}
+                    hideStats={hideStats}
+                    setHideStats={setHideStats}
+                    results={results}
                 />
             }
         </div>

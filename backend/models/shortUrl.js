@@ -19,14 +19,14 @@ const shortUrlSchema = new mongoose.Schema({
     },
     last_access: {
         type: Date,
-        default: "",
+        default: null,
         required: false
     },
     clicks: {
         type: Number,
         required: true,
         default: 0
-    }
+    },
 });
 
 module.exports = mongoose.model('ShortUrl', shortUrlSchema);

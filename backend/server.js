@@ -4,25 +4,26 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/db');
 const ShortUrl = require('./models/shortUrl');
 const bodyParser = require('body-parser');
-require('dotenv').config({ path: 'variables.env' });
-const PORT = process.env.PORT;
+require('dotenv').config({ path: './variables.env' });
 var cors = require('cors');
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
+const PORT = process.env.PORT;
+const frontEndLink = process.env.FRONTEND_LINK;
 
 connectDB();
 
-app.get('/', async (req, res) => {
-    const shortUrls = await ShortUrl.find();
+app.get('/latest', async (req, res) => {
+    const shortUrls = await ShortUrl.find().sort('-registered_at').limit(10);
     res.send(shortUrls);
 });
 
 app.post('/shortUrls', async (req, res) => {
     await ShortUrl.create({ full: req.body.fullUrl });
-    res.redirect('http://localhost:3000');
+    res.redirect(frontEndLink);
 });
 
 const getShortUrl = async (req, res, next) => {
@@ -60,6 +61,7 @@ app.post('/:shortUrl/modify', getShortUrl, async (req, res) => {
     } else {
         res.sendStatus(400);
     }
+    res.redirect(frontEndLink);
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));

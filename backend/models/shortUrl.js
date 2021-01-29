@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const shortId = require('shortid');
 
+// Add index to registered_at
+
 const shortUrlSchema = new mongoose.Schema({
     full: {
         type: String,

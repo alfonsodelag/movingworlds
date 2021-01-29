@@ -27,7 +27,7 @@ code {
   height: 32px;
 }
 
-.searchbox {
+.urlbox {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,7 +38,7 @@ code {
   border: 1px solid rgba(0,0,0,0.1); 
 }
 
-.search-input {
+.url-form {
   width: 100%;
   position: relative;
   display: flex;
@@ -57,11 +57,24 @@ code {
   font-size: 20px;
 }
 
+.go-back {
+  width: 25%;
+  float: right;
+  height: 36px;
+  border: 1px solid #43BCE7;
+  background-color: #43BCE7;
+  text-align: center;
+  color: #FFFFFF;
+  border-radius: 7px 7px 7px 7px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 .stats {
   width: 100%;
 }
 
-.search {
+.url-form {
   width: 100%;
   position: relative;
   display: flex;

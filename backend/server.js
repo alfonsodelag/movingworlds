@@ -58,7 +58,7 @@ app.post('/:shortUrl/modify', getShortUrl, async (req, res) => {
     if (req.body.changedName.length >= 4) {
         return await shortUrl.updateOne({ short: req.body.changedName });
     } else {
-        res.sendStatus(400).send("Text must be at least 4 characters long")
+        res.sendStatus(400);
     }
 });
 

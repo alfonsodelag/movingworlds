@@ -2,18 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axiosClient from '../config/axios';
 import moment from 'moment';
 import Stats from './Stats';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 function SearchBox() {
     const [results, setResults] = useState([]);
     const [stats, setStats] = useState(false);
     const [hideStats, setHideStats] = useState(true);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
         async function getUrls() {
@@ -77,7 +70,7 @@ function SearchBox() {
                                     <td >{moment(result.registered_at).format('DD/MM/YY')}</td>
                                     <td >{moment(result.last_access).format('DD/MM/YY')}</td>
                                     <td >{result.clicks}</td>
-                                    <td><Link><button className="button stats" onClick={() => getStats(result.short)}>See Stats and Modify Url</button></Link></td>
+                                    <td><button className="button stats" onClick={() => getStats(result.short)}>See Stats and Modify Url</button></td>
                                 </tr>
                             ))
                         }

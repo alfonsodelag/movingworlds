@@ -43,28 +43,39 @@ app.get('/:shortUrl', getShortUrl, async (req, res) => {
 });
 
 
-app.get('/:shortUrl/stats', getShortUrl, async (req, res) => {
-    const shortUrl = req.shortUrl;
-
-    res.send({
+function toJson(shortUrl) {
+    return {
         short: shortUrl.short,
         registeredAt: shortUrl.registered_at,
         lastAccess: shortUrl.last_access,
         clicks: shortUrl.clicks,
-    });
+    };
+}
+
+app.get('/:shortUrl/stats', getShortUrl, async (req, res) => {
+    const shortUrl = req.shortUrl;
+    res.send(toJson(shortUrl));
 });
 
 app.post('/:shortUrl/modify', getShortUrl, async (req, res) => {
     const shortUrl = req.shortUrl;
-    if (req.body.changedName.length >= 4) {
-        return await shortUrl.updateOne({ short: req.body.changedName });
-    } else {
-        res.sendStatus(400);
+
+    const changedName = req.body && req.body.changedName;
+    if (!changedName || !changedName.length || changedName.length < 4) {
+        return res.sendStatus(400)
     }
-    res.redirect(frontEndLink);
+
+    const existingShortUrl = await ShortUrl.findOne({ short: changedName });
+    if (existingShortUrl) {
+        return res.sendStatus(409);
+    }
+
+    try {
+        await shortUrl.updateOne({ short: changedName });
+        return res.send(toJson(shortUrl));
+    } catch {
+        return res.sendStatus(500);
+    }
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
-
-
-

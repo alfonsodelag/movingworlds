@@ -46,7 +46,7 @@ code {
 }
 
 .button {
-  width: 25%;
+  width: 8rem;
   height: 36px;
   border: 1px solid #43BCE7;
   background-color: #43BCE7;
@@ -55,23 +55,6 @@ code {
   border-radius: 7px 7px 7px 7px;
   cursor: pointer;
   font-size: 20px;
-}
-
-.go-back {
-  width: 25%;
-  float: right;
-  height: 36px;
-  border: 1px solid #43BCE7;
-  background-color: #43BCE7;
-  text-align: center;
-  color: #FFFFFF;
-  border-radius: 7px 7px 7px 7px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.stats {
-  width: 100%;
 }
 
 .url-form {
@@ -80,18 +63,6 @@ code {
   display: flex;
   margin-bottom: 20px;
 }
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 36px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
 
 @media only screen and (max-width: 600px) {
   .logo {

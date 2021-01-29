@@ -1,3 +1,1 @@
-window.env = {
-    "BACKEND_LINK": "http://localhost:4000"
-};
+window.env = {};

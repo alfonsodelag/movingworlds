@@ -40,7 +40,7 @@ function SearchBox() {
                 </form>
 
 
-                <table className="table table-striped table-responsive">
+                <table className="table table-striped table-responsive d-flex flex-column align-items-center">
                     <thead>
                         <tr>
                             <th>Full Url</th>

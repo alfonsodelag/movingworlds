@@ -17,7 +17,7 @@ const frontEndLink = process.env.FRONTEND_LINK;
 connectDB();
 
 app.get('/latest', async (req, res) => {
-    const shortUrls = await ShortUrl.find().sort('-registered_at').limit(10);
+    const shortUrls = await ShortUrl.find().sort({ _id: -1 }).limit(10);
     res.send(shortUrls);
 });
 

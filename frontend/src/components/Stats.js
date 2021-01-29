@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import env from "react-dotenv";
+import Spinner from './Spinner/Spinner';
 
 
 function Stats(props) {
@@ -12,8 +13,8 @@ function Stats(props) {
     const [changedName, setChangedName] = useState("");
     const [stats, setStats] = useState(false);
 
-    console.log("props", props);
     // const backendLink = env.BACKEND_LINK;
+    // console.log("backEndLink", backendLink);
 
     const changeInput = (e) => {
         setChangedName(e.target.value);
@@ -104,7 +105,7 @@ function Stats(props) {
                     :
                     (
                         <>
-                            <p>...Loading</p>
+                            <Spinner />
                         </>
                     )
             }

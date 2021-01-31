@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axiosClient from '../config/axios';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
+
+const icon = <FontAwesomeIcon icon={faInfo} />
+
 
 function SearchBox() {
     const [results, setResults] = useState([]);
@@ -24,7 +29,7 @@ function SearchBox() {
             <div className="container mt-4">
                 <form action={process.env.REACT_APP_BACKEND_URL + "/shortUrls"} method="POST" className="url-form">
                     <label htmlFor="fullUrl" className="sr-only">Url</label>
-                    <input required placeholder="Please enter a URL here..." type="url" name="fullUrl" id="fullUrl" className="form-control col mr-2" />
+                    <input required placeholder="Please enter a URL" type="url" name="fullUrl" id="fullUrl" className="form-control col mr-2" />
                     <button className="button" type="submit">
                         Shorten
                 </button>
@@ -46,7 +51,8 @@ function SearchBox() {
                                         <tr key={index}>
                                             <td ><a href={result.full}>{result.full}</a></td>
                                             <td ><a href={`${process.env.REACT_APP_BACKEND_URL}/${result.short}`}>{result.short}</a></td>
-                                            <td><Link to={`/${result.short}/stats`} className="button" >See Stats and Modify Url</Link></td>
+                                            <td className="text"><Link to={`/${result.short}/stats`} className="button">URL Stats and Modification</Link></td>
+                                            <td className="icon"><Link to={`/${result.short}/stats`} className="button">{icon}</Link></td>
                                         </tr>
                                     ))
                                 }

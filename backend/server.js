@@ -23,7 +23,7 @@ app.get('/api/latest', async (req, res) => {
 
 app.post('/api/shortUrls', async (req, res) => {
     await ShortUrl.create({ full: req.body.fullUrl });
-    res.redirect(frontEndLink);
+    res.status(201).redirect(frontEndLink);
 });
 
 const getShortUrl = async (req, res, next) => {
@@ -79,3 +79,5 @@ app.post('/api/:shortUrl/modify', getShortUrl, async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
+
+module.exports = app;

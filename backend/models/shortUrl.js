@@ -11,13 +11,13 @@ const shortUrlSchema = new mongoose.Schema({
     short: {
         type: String,
         required: true,
-        default: shortId.generate,
+        default: () => shortId.generate().substring(3),
         unique: true
     },
     registered_at: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     last_access: {
         type: Date,

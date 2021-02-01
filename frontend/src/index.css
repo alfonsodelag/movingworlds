@@ -31,7 +31,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 700px;
+  max-width: 800px;
   padding: 15px 20px 45px;
   margin: 0 auto;
   background-color: #F7F7F7;

@@ -9,10 +9,10 @@ describe('<SearchBox />', () => {
             .invoke('text')
             .should('equal', 'Post a URL')
 
-        cy.get('[data-cy=url-form')
+        cy.get('[data-cy=url-form]')
             .should('exist')
 
-        cy.get('[data-cy=fullUrl')
+        cy.get('[data-cy=fullUrl]')
             .should('exist')
             .should('have.class', 'form-control')
 

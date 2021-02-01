@@ -81,12 +81,12 @@ function Stats(props) {
                 </div>
                 <form onSubmit={(e) => changeUrl(e, stats.short)} action="" className="url-form">
                     <div className="col-md-8 mx-auto d-flex text-center">
-                        <input required placeholder="Change Url" type="text" name="changedName" id="changedName" onChange={changeInput} value={changedName} className="form-control col mr-2" />
-                        <button className="button" type="submit">Change Url</button>
+                        <input required placeholder="Change URL" type="text" name="changedName" id="changedName" onChange={changeInput} value={changedName} className="form-control col mr-2" />
+                        <button className="button" type="submit">Change URL</button>
                     </div>
                 </form>
                 <div className=" text-center mt-5">
-                    <Link to="/" className="button mt-5 btn-lg" >Go Back</Link>
+                    <Link to="/" className="button mt-5 btn-lg text-decoration-none" >Go Back</Link>
                 </div>
             </div>
         )

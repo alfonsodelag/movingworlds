@@ -25,12 +25,12 @@ function SearchBox() {
 
     return (
         <div className="urlbox">
-            <h1 className="text-center pb-4">Post a URL</h1>
+            <h1 className="text-center pb-4" data-cy="title">Post a URL</h1>
             <div className="container mt-4">
-                <form action={process.env.REACT_APP_BACKEND_URL + "/shortUrls"} method="POST" className="url-form">
+                <form action={process.env.REACT_APP_BACKEND_URL + "/shortUrls"} method="POST" className="url-form" data-cy="url-form">
                     <label htmlFor="fullUrl" className="sr-only">Url</label>
-                    <input required placeholder="Please enter a URL" type="url" name="fullUrl" id="fullUrl" className="form-control col mr-2" />
-                    <button className="button" type="submit">
+                    <input required placeholder="Please enter a URL" type="url" name="fullUrl" id="fullUrl" className="form-control col mr-2" data-cy="fullUrl" />
+                    <button className="button" type="submit" data-cy="shorten">
                         Shorten
                 </button>
                 </form>
@@ -40,8 +40,8 @@ function SearchBox() {
                         <table className="table table-striped table-responsive text-center">
                             <thead>
                                 <tr>
-                                    <th>Full Url</th>
-                                    <th>Short Url</th>
+                                    <th>Full URL</th>
+                                    <th>Short URL</th>
                                     <th>Stats</th>
                                 </tr>
                             </thead>
@@ -51,8 +51,8 @@ function SearchBox() {
                                         <tr key={index}>
                                             <td ><a href={result.full}>{result.full}</a></td>
                                             <td ><a href={`${process.env.REACT_APP_BACKEND_URL}/${result.short}`}>{result.short}</a></td>
-                                            <td className="text"><Link to={`/${result.short}/stats`} className="button">URL Stats and Modification</Link></td>
-                                            <td className="icon"><Link to={`/${result.short}/stats`} className="button">{icon}</Link></td>
+                                            <td className="text"><Link data-cy="stats" to={`/${result.short}/stats`} className="button text-decoration-none">URL Stats and Modification</Link></td>
+                                            <td className="icon"><Link to={`/${result.short}/stats`} className="button text-decoration-none">{icon}</Link></td>
                                         </tr>
                                     ))
                                 }

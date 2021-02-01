@@ -83,4 +83,7 @@ code {
   .text {
     display: none;
   }
+  .svg-inline--fa.fa-w-6 {
+    width: 1.375em
+  }
 }

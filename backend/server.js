@@ -16,12 +16,12 @@ const frontEndLink = process.env.FRONTEND_LINK;
 
 connectDB();
 
-app.get('/latest', async (req, res) => {
+app.get('/api/latest', async (req, res) => {
     const shortUrls = await ShortUrl.find().sort({ _id: -1 }).limit(10);
     res.send(shortUrls);
 });
 
-app.post('/shortUrls', async (req, res) => {
+app.post('/api/shortUrls', async (req, res) => {
     await ShortUrl.create({ full: req.body.fullUrl });
     res.redirect(frontEndLink);
 });
@@ -33,7 +33,7 @@ const getShortUrl = async (req, res, next) => {
     next();
 }
 
-app.get('/:shortUrl', getShortUrl, async (req, res) => {
+app.get('/api/:shortUrl', getShortUrl, async (req, res) => {
     const shortUrl = req.shortUrl;
 
     shortUrl.clicks++
@@ -52,12 +52,12 @@ function toJson(shortUrl) {
     };
 }
 
-app.get('/:shortUrl/stats', getShortUrl, async (req, res) => {
+app.get('/api/:shortUrl/stats', getShortUrl, async (req, res) => {
     const shortUrl = req.shortUrl;
     res.send(toJson(shortUrl));
 });
 
-app.post('/:shortUrl/modify', getShortUrl, async (req, res) => {
+app.post('/api/:shortUrl/modify', getShortUrl, async (req, res) => {
     const shortUrl = req.shortUrl;
 
     const changedName = req.body && req.body.changedName;
